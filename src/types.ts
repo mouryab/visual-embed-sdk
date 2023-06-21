@@ -410,7 +410,6 @@ export interface EmbedConfig {
     /**
      * Hide beta alert warning message for SearchEmbed.
      *
-     * @version SDK: 1.12.0 | ThoughtSpot: 8.4.0.cl, 8.4.1-sw*
      */
     suppressSageEmbedBetaWarning?: boolean;
     /**
