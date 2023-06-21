@@ -408,7 +408,7 @@ export interface EmbedConfig {
      */
     suppressSearchEmbedBetaWarning?: boolean;
     /**
-     * Hide beta alert warning message for SearchEmbed.
+     * Hide beta alert warning message for SageEmbed.
      *
      */
     suppressSageEmbedBetaWarning?: boolean;
