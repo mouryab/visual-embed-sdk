@@ -408,6 +408,12 @@ export interface EmbedConfig {
      */
     suppressSearchEmbedBetaWarning?: boolean;
     /**
+     * Hide beta alert warning message for SearchEmbed.
+     *
+     * @version SDK: 1.12.0 | ThoughtSpot: 8.4.0.cl, 8.4.1-sw*
+     */
+    suppressSageEmbedBetaWarning?: boolean;
+    /**
      * Custom style params for embed Config.
      *
      * @version SDK: 1.17.0 | ThoughtSpot: 8.9.0.cl
@@ -1842,6 +1848,10 @@ export enum Param {
     HideProfleAndHelp = 'profileAndHelpInNavBarHidden',
     HideApplicationSwitcher= 'applicationSwitcherHidden',
     HideOrgSwitcher= 'orgSwitcherHidden',
+    IsSageEmbed = 'isSageEmbed',
+    HideWorksheetSelector = 'hideWorksheetSelector',
+    DisableWorksheetChange = 'disableWorksheetChange',
+    HideEurekaResults = 'hideEurekaResults',
 }
 
 /**
