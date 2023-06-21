@@ -524,7 +524,7 @@ Allows downloading Liveboard data in PDF, XLSX, CSV, and PNG format
 +
 Allows downloading Answer data in PDF, XLSX, CSV, and PNG format
 
-The following example shows the request body with runtime filter parameters:
+The following examples show the request body with runtime filter parameters. Note that you can add additional filters by incrementing the number at the end of each parameter. For example, col2, op2, val2.
 
 .Answer report
 
