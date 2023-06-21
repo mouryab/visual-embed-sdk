@@ -37,6 +37,8 @@ import {
     customCssInterface,
     ContextMenuTriggerOptions,
 } from './types';
+import { SageEmbed } from './embed/sage';
+import { SageFullscreenEmbed } from './embed/sage-fullscreen';
 
 export {
     init,
@@ -50,6 +52,8 @@ export {
     SearchBarEmbed,
     PinboardEmbed,
     LiveboardEmbed,
+    SageEmbed,
+    SageFullscreenEmbed,
     AppEmbed,
     AuthFailureType,
     AuthStatus,
