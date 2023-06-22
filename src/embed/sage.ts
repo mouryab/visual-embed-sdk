@@ -8,7 +8,7 @@
  */
 
 import {
-    Action, DOMSelector, EmbedEvent, MessagePayload, Param, ViewConfig,
+    Action, DOMSelector, Param, ViewConfig,
 } from '../types';
 import { getQueryParamString } from '../utils';
 import { V1Embed } from './ts-embed';
@@ -89,16 +89,9 @@ export class SageEmbed extends V1Embed {
      */
     protected viewConfig: SageViewConfig;
 
-    private defaultHeight = 500;
-
     // eslint-disable-next-line no-useless-constructor
     constructor(domSelector: DOMSelector, viewConfig: SageViewConfig) {
         super(domSelector, viewConfig);
-        if (this.viewConfig.fullHeight === true) {
-            this.on(EmbedEvent.RouteChange, this.setIframeHeightForNonEmbedLiveboard);
-            this.on(EmbedEvent.EmbedHeight, this.updateIFrameHeight);
-            this.on(EmbedEvent.EmbedIframeCenter, this.embedIframeCenter);
-        }
     }
 
     /**
@@ -141,27 +134,6 @@ export class SageEmbed extends V1Embed {
 
         return getQueryParamString(params, true);
     }
-
-    /**
-     * Set the iframe height as per the computed height received
-     * from the ThoughtSpot app.
-     *
-     * @param {MessagePayload} data The event payload
-     */
-    private updateIFrameHeight = (data: MessagePayload) => {
-        this.setIFrameHeight(Math.max(data.data, this.defaultHeight));
-    };
-
-    private embedIframeCenter = (data: MessagePayload, responder: any) => {
-        const obj = this.getIframeCenter();
-        responder({ type: EmbedEvent.EmbedIframeCenter, data: obj });
-    };
-
-    private setIframeHeightForNonEmbedLiveboard = (data: MessagePayload) => {
-        if (!data.data.currentPath.startsWith('/embed/viz/')) {
-            this.setIFrameHeight(this.defaultHeight);
-        }
-    };
 
     /**
      * Construct the URL of the embedded ThoughtSpot sage to be
