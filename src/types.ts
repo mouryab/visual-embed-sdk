@@ -200,11 +200,11 @@ export interface customCssInterface {
      * rules_UNSTABLE?: {
      *     "@font-face": {
      *         "font-family": "custom-font",
-     *         "src": url("/path/") 
+     *         "src": url("/path/")
      *     };
      *   };
      * ```
-     * 
+     *
      * Also, custom css rules outside of variables.
      * @example
      * ```js
@@ -391,7 +391,7 @@ export interface EmbedConfig {
     /**
      * Disable redirection to the login page when the embedded session expires
      * This flag is typically used alongside the combination of auth modes such as {@link
-     * AuthType.AuthServer} and auto login behavior {@link EmbedConfig.autoLogin}
+        * AuthType.AuthServer} and auto login behavior {@link EmbedConfig.autoLogin}
      *
      * @version SDK: 1.9.3 | ThoughtSpot: 8.1.0.cl, 8.4.1-sw
      * @default false
@@ -447,6 +447,11 @@ export interface EmbedConfig {
      * @version SDK: 1.12.0 | ThoughtSpot: 8.4.0.cl, 8.4.1-sw*
      */
     suppressSearchEmbedBetaWarning?: boolean;
+    /**
+     * Hide beta alert warning message for SageEmbed.
+     *
+     */
+    suppressSageEmbedBetaWarning?: boolean;
     /**
      * Custom style params for embed Config.
      *
@@ -1882,6 +1887,11 @@ export enum Param {
     HideProfleAndHelp = 'profileAndHelpInNavBarHidden',
     HideApplicationSwitcher= 'applicationSwitcherHidden',
     HideOrgSwitcher= 'orgSwitcherHidden',
+    IsSageEmbed = 'isSageEmbed',
+    HideWorksheetSelector = 'hideWorksheetSelector',
+    DisableWorksheetChange = 'disableWorksheetChange',
+    HideEurekaResults = 'hideEurekaResults',
+    HideEurekaSuggestions = 'hideEurekaSuggestions',
 }
 
 /**
