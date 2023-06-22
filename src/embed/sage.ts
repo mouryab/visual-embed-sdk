@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2022
+ * Copyright (c) 2023
  *
  * Embed ThoughtSpot Sage
  *
@@ -35,21 +35,6 @@ export interface SageViewConfig extends ViewConfig {
      * flag to hide worksheet selector. default false.
      */
     hideWorksheetSelector?: boolean,
-    /**
-     * If true, help and profile buttons will hide on NavBar. By default,
-     * they are shown.
-     */
-    disableProfileAndHelp?: boolean;
-    /**
-     * If true, application switcher button will hide on NavBar. By default,
-     * they are shown.
-     */
-    hideApplicationSwitcher?: boolean;
-    /**
-     * If true, org switcher button will hide on NavBar. By default,
-     * they are shown.
-     */
-    hideOrgSwitcher?: boolean;
     /**
      * If set to true, the eureka search suggestions are not shown
      *
@@ -97,9 +82,6 @@ export class SageEmbed extends V1Embed {
             isSageEmbed,
             disableWorksheetChange,
             hideWorksheetSelector,
-            disableProfileAndHelp,
-            hideApplicationSwitcher,
-            hideOrgSwitcher,
             hideEurekaSuggestions,
         } = this.viewConfig;
 
@@ -109,9 +91,6 @@ export class SageEmbed extends V1Embed {
         params[Param.IsSageEmbed] = !!isSageEmbed;
         params[Param.DisableWorksheetChange] = !!disableWorksheetChange;
         params[Param.HideWorksheetSelector] = !!hideWorksheetSelector;
-        params[Param.HideProfleAndHelp] = !!disableProfileAndHelp;
-        params[Param.HideApplicationSwitcher] = !!hideApplicationSwitcher;
-        params[Param.HideOrgSwitcher] = !!hideOrgSwitcher;
         params[Param.HideEurekaSuggestions] = !!hideEurekaSuggestions;
         params[Param.HideActions] = [...(params[Param.HideActions] ?? [])];
         params[Param.HideActions] = [
