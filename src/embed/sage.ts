@@ -8,7 +8,7 @@
  */
 
 import {
-    Action, DOMSelector, EmbedEvent, MessagePayload, Param, ViewConfig,
+    Action, DOMSelector, Param, ViewConfig,
 } from '../types';
 import { getQueryParamString } from '../utils';
 import { V1Embed } from './ts-embed';
@@ -36,11 +36,6 @@ export interface SageViewConfig extends ViewConfig {
      */
     hideWorksheetSelector?: boolean,
     /**
-     * If true, the main navigation bar within the ThoughtSpot app
-     * is displayed. By default, the navigation bar is hidden.
-     */
-    showPrimaryNavbar?: boolean;
-    /**
      * If true, help and profile buttons will hide on NavBar. By default,
      * they are shown.
      */
@@ -55,12 +50,6 @@ export interface SageViewConfig extends ViewConfig {
      * they are shown.
      */
     hideOrgSwitcher?: boolean;
-    /**
-     * If set to true, the embedded object container dynamically resizes
-     * according to the height of the pages which support fullHeight mode.
-     *
-     */
-    fullHeight?:boolean;
     /**
      * If set to true, the eureka search suggestions are not shown
      *
@@ -94,11 +83,6 @@ export class SageEmbed extends V1Embed {
     // eslint-disable-next-line no-useless-constructor
     constructor(domSelector: DOMSelector, viewConfig: SageViewConfig) {
         super(domSelector, viewConfig);
-        if (this.viewConfig.fullHeight === true) {
-            this.on(EmbedEvent.RouteChange, this.setIframeHeightForNonEmbedLiveboard);
-            this.on(EmbedEvent.EmbedHeight, this.updateIFrameHeight);
-            this.on(EmbedEvent.EmbedIframeCenter, this.embedIframeCenter);
-        }
     }
 
     /**
@@ -113,22 +97,18 @@ export class SageEmbed extends V1Embed {
             isSageEmbed,
             disableWorksheetChange,
             hideWorksheetSelector,
-            showPrimaryNavbar,
             disableProfileAndHelp,
             hideApplicationSwitcher,
             hideOrgSwitcher,
-            fullHeight,
             hideEurekaSuggestions,
         } = this.viewConfig;
 
         const params = {};
         params[Param.EmbedApp] = true;
-        params[Param.fullHeight] = !!fullHeight;
         params[Param.HideEurekaResults] = !!hideEurekaResults;
         params[Param.IsSageEmbed] = !!isSageEmbed;
         params[Param.DisableWorksheetChange] = !!disableWorksheetChange;
         params[Param.HideWorksheetSelector] = !!hideWorksheetSelector;
-        params[Param.PrimaryNavHidden] = !showPrimaryNavbar;
         params[Param.HideProfleAndHelp] = !!disableProfileAndHelp;
         params[Param.HideApplicationSwitcher] = !!hideApplicationSwitcher;
         params[Param.HideOrgSwitcher] = !!hideOrgSwitcher;
@@ -141,27 +121,6 @@ export class SageEmbed extends V1Embed {
 
         return getQueryParamString(params, true);
     }
-
-    /**
-     * Set the iframe height as per the computed height received
-     * from the ThoughtSpot app.
-     *
-     * @param {MessagePayload} data The event payload
-     */
-    private updateIFrameHeight = (data: MessagePayload) => {
-        this.setIFrameHeight(Math.max(data.data, this.defaultHeight));
-    };
-
-    private embedIframeCenter = (data: MessagePayload, responder: any) => {
-        const obj = this.getIframeCenter();
-        responder({ type: EmbedEvent.EmbedIframeCenter, data: obj });
-    };
-
-    private setIframeHeightForNonEmbedLiveboard = (data: MessagePayload) => {
-        if (!data.data.currentPath.startsWith('/embed/viz/')) {
-            this.setIFrameHeight(this.defaultHeight);
-        }
-    };
 
     /**
      * Construct the URL of the embedded ThoughtSpot sage to be
