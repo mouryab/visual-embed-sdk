@@ -63,8 +63,6 @@ export class SageEmbed extends V1Embed {
      */
     protected viewConfig: SageViewConfig;
 
-    private defaultHeight = 500;
-
     // eslint-disable-next-line no-useless-constructor
     constructor(domSelector: DOMSelector, viewConfig: SageViewConfig) {
         super(domSelector, viewConfig);
@@ -92,7 +90,6 @@ export class SageEmbed extends V1Embed {
         params[Param.DisableWorksheetChange] = !!disableWorksheetChange;
         params[Param.HideWorksheetSelector] = !!hideWorksheetSelector;
         params[Param.HideEurekaSuggestions] = !!hideEurekaSuggestions;
-        params[Param.HideActions] = [...(params[Param.HideActions] ?? [])];
         params[Param.HideActions] = [
             ...(params[Param.HideActions] ?? []),
             ...HiddenActionItemByDefaultForSageEmbed,
