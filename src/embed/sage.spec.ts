@@ -3,7 +3,7 @@ import { init } from '../index';
 import { AuthType } from '../types';
 import {
     executeAfterWait,
-    expectUrlMatchesWithParams,
+    expectUrlMatch,
     getDocumentBody,
     getIFrameSrc,
     getRootEl,
@@ -36,9 +36,9 @@ describe('Sage  embed tests', () => {
         const sageEmbed = new SageEmbed(getRootEl(), defaultConfig);
         sageEmbed.render();
         await executeAfterWait(() => {
-            expectUrlMatchesWithParams(
+            expectUrlMatch(
                 getIFrameSrc(),
-                `http://${thoughtSpotHost}/?embedApp=true&hideEurekaResults=false&isSageEmbed=true&disableWorksheetChange=false&hideWorksheetSelector=true&hideEurekaSuggestions=true&hideAction=%5B"save","pin","editACopy","saveAsView","updateTSL","editTSL","onDeleteAnswer","share"%5D#/`,
+                `http://${thoughtSpotHost}/?embedApp=true&hideEurekaResults=false&isSageEmbed=true&disableWorksheetChange=false&hideWorksheetSelector=true&hideEurekaSuggestions=true&hideAction=%5B"save","pin","editACopy","saveAsView","updateTSL","editTSL","onDeleteAnswer","share"%5D#/embed/eureka`,
             );
         });
     });
