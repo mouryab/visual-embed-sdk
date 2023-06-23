@@ -116,4 +116,3 @@ export const expectUrlMatch = (source: string, target: string) => {
     const targetUrl = new URL(target);
     expect(sourceUrl.hash).toBe(targetUrl.hash);
 };
-
